@@ -7,6 +7,12 @@
     <title>client</title>
   </head>
   <body>
+      <script>
+        const saved = localStorage.getItem("app-theme");
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

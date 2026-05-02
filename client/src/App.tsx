@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+// App.tsx
+import { type ReactNode } from "react";
+import PortfolioHeader from "./components/global/PortfolioHeader";
 
-function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("/api/")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
-  return <h1>{message || "Loading..."}</h1>;
+function App({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <PortfolioHeader />
+      {children}
+    </>
+  );
 }
 
 export default App;
