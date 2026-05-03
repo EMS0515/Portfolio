@@ -6,7 +6,7 @@ import { useState } from "react";
 
 
 
-const THEMES = ["light", "dark", "ocean", "forest"] as const;
+const THEMES = ["light", "dark"] as const;
 
 const PortfolioHeader = () => {
     const { theme, setTheme } = useTheme();
