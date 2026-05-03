@@ -28,4 +28,4 @@ jobs:
         run: yarn build
 
       - name: Restart site
-        run: pm2 restart my-site
+        run: /home/stoute15/.nvm/versions/node/v24.15.0/bin/pm2 restart my-site
