@@ -28,4 +28,7 @@ jobs:
         run: yarn build
 
       - name: Restart site
-        run: /home/stoute15/.nvm/versions/node/v24.15.0/bin/pm2 restart my-site
+        run: |
+          pm2 delete my-site || true
+          pm2 start "$(which serve)" --name my-site -- -s /home/stoute15/Documents/Portfoli/client/dist -p 3000
+          pm2 save
