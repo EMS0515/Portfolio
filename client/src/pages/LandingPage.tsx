@@ -41,7 +41,7 @@ export const LandingPage = () => {
       <section className="lp-section" id="about">
         <h2>About</h2>
         <p>
-          WIP - This section is still being developed.
+          WIP - This section is still being in progress.
         </p>
       </section>
 
