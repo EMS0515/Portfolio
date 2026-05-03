@@ -1,14 +1,10 @@
-/* =========================
-   Base Theme Tokens
-   ========================= */
+/* Base Theme Tokens */
 :root {
   --radius: 10px;
   --transition: 0.2s ease;
 }
 
-/* =========================
-   Light Theme
-   ========================= */
+/* Light Theme */
 :root[data-theme="light"] {
   --bg: #ffffff;
   --bg-surface: #f7f7f8;
@@ -26,9 +22,7 @@
   --danger-hover: #b91c1c;
 }
 
-/* =========================
-   Dark Theme
-   ========================= */
+/* Dark Theme */
 :root[data-theme="dark"] {
   --bg: #18181b;
   --bg-surface: #27272a;
@@ -41,45 +35,6 @@
   --accent-hover: #6366f1;
 
   --border: #3f3f46;
-
-  --danger: #f87171;
-  --danger-hover: #ef4444;
-}
-
-/* =========================
-   Ocean Theme
-   ========================= */
-:root[data-theme="ocean"] {
-  --bg: #0b1d2a;
-  --bg-surface: #13293d;
-  --hover: #1a3a4f; /* ocean */
-
-  --text: #e0f2fe;
-  --text-muted: #7fb3d5;
-
-  --accent: #00b4d8;
-  --accent-hover: #0096c7;
-
-  --border: #1f4e79;
-
-  --danger: #f87171;
-  --danger-hover: #ef4444;
-}
-
-/* =========================
-   Forest Theme
-   ========================= */
-:root[data-theme="forest"] {
-  --bg: #182a18;
-  --bg-surface: #223822;
-  --hover: #2a4a2a; /* forest */
-  --text: #e6f4ea;
-  --text-muted: #8fbf8f;
-
-  --accent: #4caf50;
-  --accent-hover: #388e3c;
-
-  --border: #2f4f2f;
 
   --danger: #f87171;
   --danger-hover: #ef4444;
