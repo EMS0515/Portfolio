@@ -193,57 +193,40 @@ export default function ParticleSim() {
 
     let rafId: number;
 
-    function getClearColor(): [number, number, number, number] {
-        const raw = getComputedStyle(document.documentElement)
-            .getPropertyValue("--bg")
-            .trim()
-            .replace(/^#/, "");
-
-        if (raw.length === 6) {
-            const r = parseInt(raw.slice(0, 2), 16) / 255;
-            const g = parseInt(raw.slice(2, 4), 16) / 255;
-            const b = parseInt(raw.slice(4, 6), 16) / 255;
-            return [r, g, b, 1.0];
-        }
-
-        return [0.02, 0.02, 0.06, 1.0];
-        }
-
 function frame() {
-    if (!gl) return;
-    rafId = requestAnimationFrame(frame);
-    const { mx, my, down, force, radius, damping } = stateRef.current;
+  if (!gl) return;
+  rafId = requestAnimationFrame(frame);
+  const { mx, my, down, force, radius, damping } = stateRef.current;
 
-    gl.viewport(0, 0, canvas!.width, canvas!.height);
+  gl.viewport(0, 0, canvas!.width, canvas!.height);
 
-    gl.useProgram(updateProg);
-    gl.uniform2f(uMouse,   mx, my);
-    gl.uniform1f(uDown,    down);
-    gl.uniform1f(uForce,   force);
-    gl.uniform1f(uRadius,  radius);
-    gl.uniform1f(uDamping, damping);
+  gl.useProgram(updateProg);
+  gl.uniform2f(uMouse,   mx, my);
+  gl.uniform1f(uDown,    down);
+  gl.uniform1f(uForce,   force);
+  gl.uniform1f(uRadius,  radius);
+  gl.uniform1f(uDamping, damping);
 
-    gl.bindVertexArray(readVAO);
-    gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, tf);
-    gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, writeBuf);
-    gl.enable(gl.RASTERIZER_DISCARD);
-    gl.beginTransformFeedback(gl.POINTS);
-    gl.drawArrays(gl.POINTS, 0, N);
-    gl.endTransformFeedback();
-    gl.disable(gl.RASTERIZER_DISCARD);
-    gl.bindVertexArray(null);
-    gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, null);
+  gl.bindVertexArray(readVAO);
+  gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, tf);
+  gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, writeBuf);
+  gl.enable(gl.RASTERIZER_DISCARD);
+  gl.beginTransformFeedback(gl.POINTS);
+  gl.drawArrays(gl.POINTS, 0, N);
+  gl.endTransformFeedback();
+  gl.disable(gl.RASTERIZER_DISCARD);
+  gl.bindVertexArray(null);
+  gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, null);
 
-    const [r, g, b, a] = getClearColor();
-    gl.clearColor(r, g, b, a);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(renderProg);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
-    gl.bindVertexArray(writeVAO);
-    gl.drawArrays(gl.POINTS, 0, N);
-    gl.disable(gl.BLEND);
-    gl.bindVertexArray(null);
+  gl.clearColor(0.02, 0.02, 0.06, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.useProgram(renderProg);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+  gl.bindVertexArray(writeVAO);
+  gl.drawArrays(gl.POINTS, 0, N);
+  gl.disable(gl.BLEND);
+  gl.bindVertexArray(null);
 
   [readVAO, writeVAO] = [writeVAO, readVAO];
   [bufA,    bufB]     = [bufB,     bufA];
