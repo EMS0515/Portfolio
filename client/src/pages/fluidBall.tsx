@@ -196,13 +196,13 @@ export default function ParticleSim() {
     function getClearColor(): [number, number, number, number] {
         const raw = getComputedStyle(document.documentElement)
             .getPropertyValue("--bg")
-            .trim();
+            .trim()
+            .replace(/^#/, "");
 
-        if (raw.startsWith("#")) {
-            const hex = raw.slice(1);
-            const r = parseInt(hex.slice(0, 2), 16) / 255;
-            const g = parseInt(hex.slice(2, 4), 16) / 255;
-            const b = parseInt(hex.slice(4, 6), 16) / 255;
+        if (raw.length === 6) {
+            const r = parseInt(raw.slice(0, 2), 16) / 255;
+            const g = parseInt(raw.slice(2, 4), 16) / 255;
+            const b = parseInt(raw.slice(4, 6), 16) / 255;
             return [r, g, b, 1.0];
         }
 
