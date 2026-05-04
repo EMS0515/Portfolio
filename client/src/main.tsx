@@ -7,6 +7,7 @@ import "./styles/themes.css";
 import "./styles/global.css";
 import App from "./App";
 import { LandingPage } from "./pages/LandingPage";
+import FluidBall from "./pages/fluidBall";
 
 
 createRoot(document.getElementById("root")!).render(
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
         <App>
           <Routes>
             <Route path="/"              element={<LandingPage />} />
+            <Route path="/fluidball"     element={<FluidBall />} />
           </Routes>
         </App>
       </BrowserRouter>
