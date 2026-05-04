@@ -94,8 +94,6 @@ export default function ParticleSim() {
     const gl = canvas.getContext("webgl2");
     if (!gl) { alert("WebGL2 not supported"); return; }
 
-    // NDC helpers
-
     function ndcX(clientX: number) {
       const rect = canvas!.getBoundingClientRect();
       return ((clientX - rect.left) / rect.width) * 2 - 1;
@@ -105,11 +103,9 @@ export default function ParticleSim() {
       return -(((clientY - rect.top) / rect.height) * 2 - 1);
     }
 
-    // Mouse
-
-    const onMouseDown = (e: MouseEvent) => { stateRef.current.down = 1; stateRef.current.mx = ndcX(e.clientX); stateRef.current.my = ndcY(e.clientY); };
-    const onMouseUp   = () => { stateRef.current.down = 0; };
-    const onMouseMove = (e: MouseEvent) => { stateRef.current.mx = ndcX(e.clientX); stateRef.current.my = ndcY(e.clientY); };
+    const onMouseDown  = (e: MouseEvent) => { stateRef.current.down = 1; stateRef.current.mx = ndcX(e.clientX); stateRef.current.my = ndcY(e.clientY); };
+    const onMouseUp    = () => { stateRef.current.down = 0; };
+    const onMouseMove  = (e: MouseEvent) => { stateRef.current.mx = ndcX(e.clientX); stateRef.current.my = ndcY(e.clientY); };
     const onTouchStart = (e: TouchEvent) => { e.preventDefault(); stateRef.current.down = 1; stateRef.current.mx = ndcX(e.touches[0].clientX); stateRef.current.my = ndcY(e.touches[0].clientY); };
     const onTouchEnd   = () => { stateRef.current.down = 0; };
     const onTouchMove  = (e: TouchEvent) => { e.preventDefault(); stateRef.current.mx = ndcX(e.touches[0].clientX); stateRef.current.my = ndcY(e.touches[0].clientY); };
@@ -121,8 +117,6 @@ export default function ParticleSim() {
     canvas.addEventListener("touchstart", onTouchStart, { passive: false });
     canvas.addEventListener("touchend",   onTouchEnd);
     canvas.addEventListener("touchmove",  onTouchMove,  { passive: false });
-
-    // GL helpers
 
     function makeShader(type: number, src: string): WebGLShader {
       const s = gl!.createShader(type)!;
@@ -176,8 +170,6 @@ export default function ParticleSim() {
       return vao;
     }
 
-    // Setup
-
     const updateProg = makeProgram(updateVS, updateFS, ["v_pos", "v_vel"]);
     const renderProg = makeProgram(renderVS, renderFS);
 
@@ -193,52 +185,53 @@ export default function ParticleSim() {
     const uRadius  = gl.getUniformLocation(updateProg, "u_radius")!;
     const uDamping = gl.getUniformLocation(updateProg, "u_damping")!;
 
-    // expose reset to the button via a ref-stable function
     (canvas as any).__reset = () => {
       bufA = makeBuffer(true);  bufB = makeBuffer(false);
       vaoA = makeVAO(bufA);     vaoB = makeVAO(bufB);
       readVAO = vaoA; writeVAO = vaoB; writeBuf = bufB;
     };
 
-   // Frame loop
-
     let rafId: number;
 
-    function frame() {
-      rafId = requestAnimationFrame(frame);
-      const { mx, my, down, force, radius, damping } = stateRef.current;
+function frame() {
+  if (!gl) return;
+  rafId = requestAnimationFrame(frame);
+  const { mx, my, down, force, radius, damping } = stateRef.current;
 
-      gl!.viewport(0, 0, canvas!.width, canvas!.height);
+  gl.viewport(0, 0, canvas!.width, canvas!.height);
 
-      gl!.useProgram(updateProg);
-      gl!.uniform2f(uMouse,   mx, my);
-      gl!.uniform1f(uDown,    down);
-      gl!.uniform1f(uForce,   force);
-      gl!.uniform1f(uRadius,  radius);
-      gl!.uniform1f(uDamping, damping);
+  gl.useProgram(updateProg);
+  gl.uniform2f(uMouse,   mx, my);
+  gl.uniform1f(uDown,    down);
+  gl.uniform1f(uForce,   force);
+  gl.uniform1f(uRadius,  radius);
+  gl.uniform1f(uDamping, damping);
 
-      gl!.bindVertexArray(readVAO);
-      gl!.bindTransformFeedback(gl!.TRANSFORM_FEEDBACK, tf);
-      gl!.bindBufferBase(gl!.TRANSFORM_FEEDBACK_BUFFER, 0, writeBuf);
-      gl!.enable(gl!.RASTERIZER_DISCARD);
-      gl!.beginTransformFeedback(gl!.POINTS);
-      gl!.drawArrays(gl!.POINTS, 0, N);
-      gl!.endTransformFeedback();
-      gl!.disable(gl!.RASTERIZER_DISCARD);
-      gl!.bindVertexArray(null);
-      gl!.bindTransformFeedback(gl!.TRANSFORM_FEEDBACK, null);
+  gl.bindVertexArray(readVAO);
+  gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, tf);
+  gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, writeBuf);
+  gl.enable(gl.RASTERIZER_DISCARD);
+  gl.beginTransformFeedback(gl.POINTS);
+  gl.drawArrays(gl.POINTS, 0, N);
+  gl.endTransformFeedback();
+  gl.disable(gl.RASTERIZER_DISCARD);
+  gl.bindVertexArray(null);
+  gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, null);
 
-      gl!.clearColor(0.02, 0.02, 0.06, 1.0);
-      gl!.clear(gl!.COLOR_BUFFER_BIT);
-      gl!.useProgram(renderProg);
-      gl!.enable(gl!.BLEND);
-      gl!.blendFunc(gl!.SRC_ALPHA, gl!.ONE);
-      gl!.bindVertexArray(writeVAO);
+  gl.clearColor(0.02, 0.02, 0.06, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.useProgram(renderProg);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+  gl.bindVertexArray(writeVAO);
+  gl.drawArrays(gl.POINTS, 0, N);
+  gl.disable(gl.BLEND);
+  gl.bindVertexArray(null);
 
-      [readVAO, writeVAO] = [writeVAO, readVAO];
-      [bufA,    bufB]     = [bufB,     bufA];
-      writeBuf = bufB;
-    }
+  [readVAO, writeVAO] = [writeVAO, readVAO];
+  [bufA,    bufB]     = [bufB,     bufA];
+  writeBuf = bufB;
+}
 
     frame();
 
@@ -255,7 +248,7 @@ export default function ParticleSim() {
     };
   }, []);
 
- return (
+  return (
     <div className="particle-wrapper">
       <canvas ref={canvasRef} className="particle-canvas" />
       <div className="particle-controls">

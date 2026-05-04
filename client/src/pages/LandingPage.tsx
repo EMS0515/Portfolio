@@ -19,6 +19,7 @@ const PROJECTS = [
     desc: "A Trello-inspired project management app with a React frontend, FastAPI backend, and PostgreSQL database. still in progress.",
     stack: ["React", "FastAPI", "PostgreSQL", "Docker"],
     featured: true,
+    path: "/pyboard"
   },
 
     {
@@ -26,6 +27,7 @@ const PROJECTS = [
     desc: "Simple WebGL2 interactive particle simulation using React and TypeScript with sliders for adjusting parameters.",
     stack: ["React", "TypeScript", "WebGL2"],
     featured: true,
+    path: "/fluidball"
   }
 ];
 
@@ -66,7 +68,7 @@ export const LandingPage = () => {
       <section className="lp-section" id="projects">
         <h2>Projects</h2>
         <div className="lp-projects">
-          {PROJECTS.map(({ name, desc, stack, featured }) => (
+          {PROJECTS.map(({ name, desc, stack, featured, path }) => (
             <div className={`lp-card ${featured ? "lp-card-featured" : ""}`} key={name}>
               <div className="lp-card-top">
                 {featured && <span className="lp-badge">Featured</span>}
@@ -76,8 +78,7 @@ export const LandingPage = () => {
               <div className="lp-stack">
                 {stack.map(s => <span key={s}>{s}</span>)}
               </div>
-              {featured && <button onClick={() => navigate("/pyboard")} className="lp-btn lp-btn-sm">Launch →</button>}
-              <button onClick={() => navigate("/fluidball")} className="lp-btn lp-btn-sm">Launch →</button>
+              {featured && <button onClick={() => navigate(path)} className="lp-btn lp-btn-sm">Launch →</button>}
             </div>
           ))}
         </div>
