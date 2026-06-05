@@ -109,10 +109,6 @@ export const LandingPage = () => {
           </div>
       </section>
 
-      <footer className="lp-footer">
-        Built with React TypeScript · {new Date().getFullYear()}
-      </footer>
-
     </div>
   );
 };

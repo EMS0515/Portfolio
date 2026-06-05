@@ -10,6 +10,7 @@ import { LandingPage } from "./pages/LandingPage";
 import FluidBall from "./pages/fluidBall";
 import PyBoard from "./pages/pyboard";
 import Resume from "./pages/resume";
+import PrivacyPolicy from "./pages/privacyPolicy";
 
 
 createRoot(document.getElementById("root")!).render(
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/fluidball"     element={<FluidBall />} />
             <Route path="/pyboard"       element={<PyBoard />} />
             <Route path="/resume"        element={<Resume />} />
+            <Route path="/privacy"       element={<PrivacyPolicy />} />
           </Routes>
         </App>
       </BrowserRouter>
