@@ -105,8 +105,8 @@ export const LandingPage = () => {
           <a href="mailto:you@email.com">✉ eric.stout15@gmail.com</a>
           <a href="https://github.com/EMS0515" target="_blank" rel="noreferrer">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/ericstout2003/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href="/resume" target="_blank" rel="noreferrer">Resume ↗</a>
-        </div>
+          <a href="/resume">Resume ↗</a>        
+          </div>
       </section>
 
       <footer className="lp-footer">
