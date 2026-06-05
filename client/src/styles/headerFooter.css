@@ -1,5 +1,7 @@
-/* PortfolioHeader.css — uses theme variables from themes.css */
+/* headerFooter.css — uses theme variables from themes.css */
 
+
+/*  Header  */
 .ph-header {
   display: flex;
   align-items: center;
@@ -79,4 +81,41 @@
 @media (max-width: 600px) {
   .ph-nav { gap: 1rem; }
   .ph-home-link { display: none; }
+}
+
+/*  Footer  */
+.pf-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  font-family: system-ui, sans-serif;
+}
+
+.pf-footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.pf-footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.pf-footer-link {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.pf-footer-link:hover { color: var(--text); }
+
+@media (max-width: 600px) {
+  .pf-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
 }

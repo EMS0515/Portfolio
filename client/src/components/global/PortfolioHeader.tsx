@@ -3,7 +3,7 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useState } from "react";
-import "../../styles/header.css";
+import "../../styles/headerFooter.css";
 
 
 
