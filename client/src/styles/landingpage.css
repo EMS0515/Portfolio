@@ -1,6 +1,6 @@
 /* landingpage.css — uses theme variables from themes.css */
 
-/* ── Base ── */
+/*  Base  */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 .lp-root {
@@ -12,12 +12,12 @@
   min-height: 100vh;
 }
 
-/* ── Nav ── */
+/*  Nav  */
 .lp-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 2rem;
+  padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
   border-bottom: 1px solid var(--border);
   background: var(--bg);
   position: sticky;
@@ -37,31 +37,35 @@
 }
 .lp-nav-links a:hover { color: var(--text); }
 
-/* ── Layout ── */
+/*  Layout  */
 .lp-hero,
 .lp-section {
-  max-width: 720px;
+  max-width: min(1200px, 92vw);
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 2.5rem clamp(1rem, 3vw, 2rem);
 }
 
-.lp-hero { padding-top: 7rem; }
+.lp-hero { padding-top: 3rem; padding-bottom: 2rem; }
 
 .lp-alt {
   background: var(--bg-surface);
   max-width: 100%;
 }
-.lp-alt > * { max-width: 720px; margin-inline: auto; }
+.lp-alt > * {
+  max-width: min(1200px, 92vw);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
 
 .lp-section h2 {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
-/* ── Hero ── */
+/*  Hero  */
 .lp-eyebrow { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
 
 .lp-hero h1 {
@@ -72,11 +76,11 @@
   margin-bottom: 0.75rem;
 }
 
-.lp-role { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+.lp-role { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
 
 .lp-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-/* ── Buttons ── */
+/*  Buttons  */
 .lp-btn {
   display: inline-block;
   padding: 0.6rem 1.25rem;
@@ -99,10 +103,17 @@
 
 .lp-btn-sm { padding: 0.4rem 0.9rem; font-size: 0.8rem; margin-top: 0.75rem; }
 
-/* ── About ── */
-.lp-section#about p { color: var(--text-muted); max-width: 56ch; line-height: 1.8; }
+/*  About  */
+.lp-section#about { padding-top: 1.5rem; padding-bottom: 1.5rem; }
 
-/* ── Skills ── */
+.lp-section#about p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 100%;
+}
+.lp-section#about p + p { margin-top: 1rem; }
+
+/*  Skills  */
 .lp-skills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
 .lp-chip {
@@ -116,10 +127,10 @@
 }
 .lp-chip-tag { color: var(--text-muted); font-size: 0.72rem; }
 
-/* ── Projects ── */
+/*  Projects  */
 .lp-projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -132,7 +143,8 @@
   border-radius: 6px;
   background: var(--bg-surface);
 }
-.lp-card-featured { border-color: var(--accent); grid-column: 1 / -1; }
+
+.lp-card-featured { border-color: var(--accent); }
 
 .lp-card-top {
   display: flex;
@@ -157,7 +169,7 @@
   color: var(--text-muted);
 }
 
-/* ── Contact ── */
+/*  Contact  */
 .lp-section#contact > p { color: var(--text-muted); margin-bottom: 1.5rem; }
 
 .lp-contact { display: flex; flex-wrap: wrap; gap: 1.25rem; }
@@ -170,7 +182,7 @@
 }
 .lp-contact a:hover { border-color: var(--accent); }
 
-/* ── Footer ── */
+/*  Footer  */
 .lp-footer {
   text-align: center;
   padding: 2rem;
@@ -179,13 +191,7 @@
   border-top: 1px solid var(--border);
 }
 
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .lp-nav-links { display: none; }
-  .lp-card-featured { grid-column: auto; }
-}
-
-/* ── Theme Picker (nav dropdown) ── */
+/*  Theme Picker  */
 .lp-theme-picker { position: relative; }
 
 .lp-theme-toggle {
@@ -226,3 +232,11 @@
 }
 .lp-theme-option:hover { background: var(--border); color: var(--text); }
 .lp-theme-option.active { color: var(--accent); }
+
+/*  Responsive  */
+@media (max-width: 600px) {
+  .lp-nav-links { display: none; }
+  .lp-card-featured { grid-column: auto; }
+  .lp-projects { grid-template-columns: 1fr; }
+  .lp-hero { padding-top: 2rem; }
+}

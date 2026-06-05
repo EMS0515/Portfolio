@@ -8,6 +8,8 @@ import "./styles/global.css";
 import App from "./App";
 import { LandingPage } from "./pages/LandingPage";
 import FluidBall from "./pages/fluidBall";
+import PyBoard from "./pages/pyboard";
+import Resume from "./pages/resume";
 
 
 createRoot(document.getElementById("root")!).render(
@@ -18,6 +20,8 @@ createRoot(document.getElementById("root")!).render(
           <Routes>
             <Route path="/"              element={<LandingPage />} />
             <Route path="/fluidball"     element={<FluidBall />} />
+            <Route path="/pyboard"       element={<PyBoard />} />
+            <Route path="/resume"        element={<Resume />} />
           </Routes>
         </App>
       </BrowserRouter>

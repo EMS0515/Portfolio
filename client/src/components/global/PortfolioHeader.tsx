@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useState } from "react";
+import "../../styles/header.css";
 
 
 
@@ -12,7 +13,7 @@ const PortfolioHeader = () => {
     const { theme, setTheme } = useTheme();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     return (
-        <header>
+        <header className="ph-header">
         <h1>My Portfolio</h1>
         <Link to="/">Home</Link>
         <div className="lp-theme-picker">

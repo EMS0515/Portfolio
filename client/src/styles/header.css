@@ -1,0 +1,82 @@
+/* PortfolioHeader.css — uses theme variables from themes.css */
+
+.ph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  font-family: system-ui, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ph-logo {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.ph-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ph-home-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.15s;
+}
+.ph-home-link:hover { color: var(--text); }
+
+/* Theme picker — mirrors .lp-theme-picker exactly */
+.ph-theme-picker { position: relative; }
+
+.ph-theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.ph-theme-toggle:hover { color: var(--text); border-color: var(--text-muted); }
+
+.ph-theme-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 120px;
+  z-index: 20;
+}
+
+.ph-theme-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+.ph-theme-option:hover { background: var(--border); color: var(--text); }
+.ph-theme-option.active { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .ph-nav { gap: 1rem; }
+  .ph-home-link { display: none; }
+}

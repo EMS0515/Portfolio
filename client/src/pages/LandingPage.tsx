@@ -4,20 +4,25 @@ import "../styles/landingpage.css";
 
 const SKILLS = [
   { label: "React",      tag: "Frontend" },
+  { label: "JavaScript", tag: "Language" },
   { label: "TypeScript", tag: "Language" },
   { label: "Python",     tag: "Language" },
-  { label: "FastAPI",    tag: "Backend"  },
-  { label: "PostgreSQL", tag: "Database" },
-  { label: "Docker",     tag: "DevOps"   },
   { label: "Java",       tag: "Language" },
+  { label: "C++",        tag: "Language" },
+  { label: "FastAPI",    tag: "Backend"  },
+  { label: "SQLAlchemy", tag: "ORM" },
+  { label: "PostgreSQL", tag: "Database" },
+  { label: "MongoDB",     tag: "Database"   },
+  { label: "Google Cloud",tag: "Cloud Computing"   },
+  { label: "Docker",     tag: "DevOps"   },
   { label: "Git",        tag: "Tooling"  },
 ];
 
 const PROJECTS = [
   {
     name: "PyBoard",
-    desc: "A Trello-inspired project management app with a React frontend, FastAPI backend, and PostgreSQL database. still in progress.",
-    stack: ["React", "FastAPI", "PostgreSQL", "Docker"],
+    desc: "A Trello-inspired project management app. This is an in progress system updating a similar system built for a university project.",
+    stack: ["React","TypeScript", "Python", "FastAPI", "PostgreSQL", "Docker"],
     featured: true,
     path: "/pyboard"
   },
@@ -48,9 +53,18 @@ export const LandingPage = () => {
 
       <section className="lp-section" id="about">
         <h2>About</h2>
-        <p>
-          WIP - This section is still being in progress. pipeline test.
-        </p>
+          <p>
+            I am a fulltime student at East Carolina University working on a masters of Science in Computer Science
+            while also working on 2 certifications. Those two certificates being Intelligent systems and Software Engineering.
+            Through my coursework, I have developed a strong foundation in programming principles and problem-solving,
+            with the ability to apply these skills across multiple popular programming languages.
+          </p>
+          <p>
+            Recently, my focus has shifted toward web development and database-driven applications, where I have been building
+            hands-on experience with modern web technologies and data management using the react framework. I also have experience
+            with software engineering documentation, development processes, and collaborative workflows. I am passionate about
+            continuing to grow as a software engineer and applying my technical skills to real-world projects and professional environments.
+          </p>
       </section>
 
       <section className="lp-section lp-alt" id="skills">
@@ -91,11 +105,12 @@ export const LandingPage = () => {
           <a href="mailto:you@email.com">✉ eric.stout15@gmail.com</a>
           <a href="https://github.com/EMS0515" target="_blank" rel="noreferrer">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/ericstout2003/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="/resume" target="_blank" rel="noreferrer">Resume ↗</a>
         </div>
       </section>
 
       <footer className="lp-footer">
-        Built with React & FastAPI · {new Date().getFullYear()}
+        Built with React TypeScript · {new Date().getFullYear()}
       </footer>
 
     </div>

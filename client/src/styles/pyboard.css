@@ -1,0 +1,30 @@
+.pyboard {
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.pyboard-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pyboard h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.pyboard p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.pyboard-placeholder {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
